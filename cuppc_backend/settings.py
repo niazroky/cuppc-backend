@@ -38,9 +38,9 @@ INSTALLED_APPS = [
 ]
 
 
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:5173',  # Vite dev server default port
-# ]
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',  # Vite dev server default port
+]
 
 # Configure Django REST framework to use JWT authentication as the default method.
 REST_FRAMEWORK = {

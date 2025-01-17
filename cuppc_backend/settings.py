@@ -1,5 +1,7 @@
 from datetime import timedelta
 from pathlib import Path
+from os import getenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,9 +14,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-xmr^gkzos*ih@23wmo&@%%#tfek854yx3kcmflxdtk6c!22cx7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = getenv("IS_DEBUG", "True")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    getenv("APP_HOST")
+]
 
 
 # Application definition
@@ -139,7 +143,25 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+
+# The absolute path where Django will collect all static files after running the `collectstatic` command.
+# This folder is used to serve static files in production.
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# The URL prefix for accessing static files in your project.
+# Static files will be served at `https://yourdomain.com/static/` in production.
+STATIC_URL = '/static/'
+
+# Additional directories where Django will look for static files during development.
+# Typically, this includes your project's custom static files (e.g., CSS, JS, images).
+# These files will be collected into STATIC_ROOT during the `collectstatic` process.
+STATICFILES_DIRS = [
+    BASE_DIR / "static"
+]
+
+
+MEDIA_ROOT = BASE_DIR / "uploads"
+MEDIA_URL = "/files/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
